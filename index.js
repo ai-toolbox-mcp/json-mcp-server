@@ -191,7 +191,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
       },
       {
         name: 'generate_json_schema',
-        description: 'Generate a JSON schema from a JSON file using genson-js',
+        description: 'Generate a JSON schema from a JSON file',
         inputSchema: {
           type: 'object',
           properties: {

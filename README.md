@@ -77,6 +77,44 @@ npm install
 chmod +x index.js
 ```
 
+## Claude Desktop Installation
+
+**Mac/Linux**:
+
+```json
+{
+  "mcpServers": {
+    "json-mcp-server": {
+      "command": "node",
+      "args": [
+        "/path/to/index.js",
+        "--verbose=true",
+        "--file-path=/path/to/file.json",
+        "--jq-path=/path/to/jq"
+      ]
+    }
+  }
+}
+```
+
+**Windows**:
+
+```json
+{
+  "mcpServers": {
+    "json-mcp-server": {
+      "command": "node",
+      "args": [
+        "C:\\path\\to\\index.js",
+        "--verbose=true",
+        "--file-path=C:\\path\\to\\file.json",
+        "--jq-path=C:\\path\\to\\jq.exe"
+      ]
+    }
+  }
+}
+```
+
 ## Usage
 
 ### Command Line Arguments
