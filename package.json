@@ -1,5 +1,5 @@
 {
-  "name": "json-mcp-server",
+  "name": "@ai-toolbox-mcp/json-mcp-server",
   "version": "1.0.0",
   "description": "MCP server providing JSON querying, schema generation, and validation tools",
   "type": "module",
