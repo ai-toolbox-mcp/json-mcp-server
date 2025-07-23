@@ -15,6 +15,9 @@
     "clean-unix": "rm -rf node_modules package-lock.json",
     "clean": "npm run clean-win || npm run clean-unix"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
   "keywords": [
     "mcp",
     "json",
