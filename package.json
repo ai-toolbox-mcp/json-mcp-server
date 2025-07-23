@@ -13,7 +13,10 @@
     "test": "node test.js",
     "clean-win": "if exist node_modules rmdir /s /q node_modules && if exist package-lock.json del package-lock.json",
     "clean-unix": "rm -rf node_modules package-lock.json",
-    "clean": "npm run clean-win || npm run clean-unix"
+    "clean": "npm run clean-win || npm run clean-unix",
+    "publish:github": "npm publish --registry=https://npm.pkg.github.com",
+    "publish:npm": "npm publish --registry=https://registry.npmjs.org/",
+    "publish:all": "npm run publish:npm && npm run publish:github"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
