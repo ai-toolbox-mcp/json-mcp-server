@@ -1,0 +1,47 @@
+{
+  "name": "json-mcp-server",
+  "version": "1.0.0",
+  "description": "MCP server providing JSON querying, schema generation, and validation tools",
+  "type": "module",
+  "main": "index.js",
+  "bin": {
+    "json-mcp-server": "./index.js"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node index.js --verbose=true",
+    "test": "node test.js",
+    "clean-win": "if exist node_modules rmdir /s /q node_modules && if exist package-lock.json del package-lock.json",
+    "clean-unix": "rm -rf node_modules package-lock.json",
+    "clean": "npm run clean-win || npm run clean-unix"
+  },
+  "keywords": [
+    "mcp",
+    "json",
+    "jq",
+    "schema",
+    "validation",
+    "model-context-protocol"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "node-jq": "^6.0.1",
+    "ajv": "^8.17.1",
+    "commander": "^12.1.0",
+    "genson-js": "^0.0.8",
+    "which": "^4.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/json-mcp-server.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/json-mcp-server/issues"
+  },
+  "homepage": "https://github.com/yourusername/json-mcp-server#readme"
+}
