@@ -29,7 +29,7 @@
     "validation",
     "model-context-protocol"
   ],
-  "author": "Your Name",
+  "author": "Eric Berry (eric@berrydev.ai)",
   "license": "MIT",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.0",
@@ -44,10 +44,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/json-mcp-server.git"
+    "url": "https://github.com/ai-toolbox-mcp/json-mcp-server.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/json-mcp-server/issues"
+    "url": "https://github.com/ai-toolbox-mcp/json-mcp-server/issues"
   },
-  "homepage": "https://github.com/yourusername/json-mcp-server#readme"
+  "homepage": "https://github.com/ai-toolbox-mcp/json-mcp-server#readme"
 }
