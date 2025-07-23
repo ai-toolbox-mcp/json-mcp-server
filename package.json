@@ -1,6 +1,6 @@
 {
   "name": "@ai-toolbox-mcp/json-mcp-server",
-  "version": "1.0.3",
+  "version": "1.0.0",
   "description": "MCP server providing JSON querying, schema generation, and validation tools",
   "type": "module",
   "main": "index.js",
@@ -16,7 +16,11 @@
     "clean": "npm run clean-win || npm run clean-unix",
     "publish:github": "npm publish --registry=https://npm.pkg.github.com",
     "publish:npm": "npm publish --registry=https://registry.npmjs.org/",
-    "publish:all": "npm run publish:npm && npm run publish:github"
+    "publish:all": "npm run publish:npm && npm run publish:github",
+    "release:patch": "node scripts/release.js patch",
+    "release:minor": "node scripts/release.js minor",
+    "release:major": "node scripts/release.js major",
+    "release": "node scripts/release.js"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
