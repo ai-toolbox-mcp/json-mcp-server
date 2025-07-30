@@ -54,6 +54,7 @@ jq --version
 - **Query JSON**: Use jq notation to query JSON files with complex filters and transformations
 - **Generate JSON Schema**: Automatically generate JSON schemas from existing JSON data
 - **Validate JSON Schema**: Ensure that JSON schemas are properly formed and valid
+- **S3 Sync**: Automatically sync JSON files from AWS S3 at startup with smart caching
 
 ## Installation
 
@@ -78,6 +79,8 @@ chmod +x index.js
 ```
 
 ## Claude Desktop Installation
+
+### Basic Configuration
 
 **Mac/Linux**:
 
@@ -115,6 +118,32 @@ chmod +x index.js
 }
 ```
 
+### Configuration with S3 Sync (Optional)
+
+To enable automatic S3 synchronization, add AWS credentials and S3 parameters. **Note**: S3 sync only runs when both `--s3-uri` and `--file-path` arguments are provided:
+
+```json
+{
+  "mcpServers": {
+    "json-mcp-server": {
+      "command": "node",
+      "args": [
+        "/path/to/index.js",
+        "--verbose=true",
+        "--file-path=/absolute/path/to/local-data.json",
+        "--s3-uri=s3://your-bucket-name/path/to/data.json",
+        "--aws-region=us-east-1"
+      ],
+      "env": {
+        "AWS_ACCESS_KEY_ID": "your-access-key-id",
+        "AWS_SECRET_ACCESS_KEY": "your-secret-access-key",
+        "AWS_REGION": "us-east-1"
+      }
+    }
+  }
+}
+```
+
 ## Usage
 
 ### Command Line Arguments
@@ -122,6 +151,8 @@ chmod +x index.js
 - `--verbose=true`: Enable verbose logging (default: false)
 - `--file-path=/path/to/file.json`: Set a default file path for operations (optional)
 - `--jq-path=/path/to/jq`: Specify custom jq binary path (auto-detected if not provided)
+- `--s3-uri=s3://bucket/key`: S3 URI to sync from at startup (optional)
+- `--aws-region=region`: AWS region for S3 operations (default: us-east-1)
 
 ### Starting the Server
 
@@ -168,6 +199,9 @@ node index.js --verbose=true --file-path=/home/user/data.json
 
 # With custom jq binary path
 node index.js --verbose=true --jq-path=/usr/local/bin/jq
+
+# With S3 sync (requires AWS credentials in environment)
+node index.js --verbose=true --file-path=/home/user/data.json --s3-uri=s3://my-bucket/data.json --aws-region=us-west-2
 ```
 
 **Using npm scripts (all platforms):**
@@ -301,6 +335,43 @@ The server provides detailed error messages for:
 - Access to the file system for reading JSON files
 - Files must use absolute paths for security
 
+## S3 Sync Feature (Optional)
+
+The server can automatically synchronize JSON files from AWS S3 at startup when the `--s3-uri` argument is provided. This feature:
+
+- **Smart Sync**: Only downloads if S3 file is newer than local file or local file doesn't exist
+- **Startup Integration**: Sync happens before server connection, ensuring fresh data
+- **Error Recovery**: Server continues startup even if S3 sync fails
+- **Progress Reporting**: Shows download progress in verbose mode
+
+### AWS Credentials Configuration
+
+The server supports multiple AWS credential methods:
+
+1. **Environment Variables** (recommended for Claude Desktop):
+   ```bash
+   AWS_ACCESS_KEY_ID=your-access-key-id
+   AWS_SECRET_ACCESS_KEY=your-secret-access-key
+   AWS_REGION=us-east-1
+   ```
+
+2. **AWS Profile**: Uses default AWS profile or AWS CLI configuration
+3. **IAM Roles**: For EC2 instances or containerized environments
+4. **AWS SSO**: Single sign-on credentials
+
+### S3 Usage Examples
+
+```bash
+# Basic S3 sync
+node index.js --s3-uri="s3://my-bucket/data.json" --file-path="/absolute/path/to/data.json"
+
+# With verbose logging
+node index.js --s3-uri="s3://my-bucket/data.json" --file-path="/path/to/data.json" --verbose=true
+
+# Custom AWS region
+node index.js --s3-uri="s3://my-bucket/data.json" --file-path="/path/to/data.json" --aws-region="eu-west-1"
+```
+
 ## Dependencies
 
 - `@modelcontextprotocol/sdk`: MCP protocol implementation (latest v1.x)
@@ -309,6 +380,7 @@ The server provides detailed error messages for:
 - `ajv`: JSON schema validation
 - `commander`: Command line argument parsing
 - `which`: Binary path detection utility
+- `@aws-sdk/client-s3`: AWS S3 client for file synchronization
 
 ## Troubleshooting
 
@@ -362,6 +434,21 @@ If you encounter dependency issues:
    ```bash
    npm cache clean --force
    ```
+
+### S3 Sync Issues
+
+If you encounter S3 sync errors:
+
+1. **Check AWS credentials**: Ensure AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY are set
+2. **Verify bucket name**: Ensure the S3 bucket name is correct and accessible
+3. **Check permissions**: Ensure your AWS credentials have read access to the S3 bucket
+4. **Verify region**: Ensure the AWS region matches your bucket's region
+5. **Check file path**: Ensure the local file path is absolute and the directory exists
+
+Common S3 errors:
+- `NoSuchBucket`: The bucket name is incorrect or doesn't exist
+- `AccessDenied`: Your AWS credentials lack permission to access the bucket
+- `NotFound`: The specified S3 key (file path) doesn't exist in the bucket
 
 ### Permission Issues
 

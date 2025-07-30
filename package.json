@@ -14,6 +14,8 @@
     "clean-win": "if exist node_modules rmdir /s /q node_modules && if exist package-lock.json del package-lock.json",
     "clean-unix": "rm -rf node_modules package-lock.json",
     "clean": "npm run clean-win || npm run clean-unix",
+    "inspect:local": "npx @modelcontextprotocol/inspector --config claude_desktop_config.json --server json-mcp-server-local",
+    "inspect:published": "npx @modelcontextprotocol/inspector --config claude_desktop_config.json --server json-mcp-server",
     "publish:github": "npm publish --registry=https://npm.pkg.github.com",
     "publish:npm": "npm publish --registry=https://registry.npmjs.org/",
     "publish:all": "npm run publish:npm && npm run publish:github",
@@ -36,11 +38,12 @@
   "author": "Eric Berry (eric@berrydev.ai)",
   "license": "MIT",
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.658.1",
     "@modelcontextprotocol/sdk": "^1.0.0",
-    "node-jq": "^6.0.1",
     "ajv": "^8.17.1",
     "commander": "^12.1.0",
     "genson-js": "^0.0.8",
+    "node-jq": "^6.0.1",
     "which": "^4.0.0"
   },
   "engines": {
