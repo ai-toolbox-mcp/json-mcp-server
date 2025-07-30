@@ -1,22 +1,14 @@
 # Release Process
 
-This repository uses an automated release process that creates both GitHub releases and publishes to npm.
+This repository uses a direct npm publishing process without GitHub Actions.
 
 ## Prerequisites
 
-### 1. NPM Authentication
+### NPM Authentication
 Make sure you're logged in to npm:
 ```bash
 npm login --registry=https://registry.npmjs.org/
 ```
-
-### 2. GitHub Secrets Setup
-The repository needs an `NPM_TOKEN` secret configured:
-
-1. Go to [npm access tokens](https://www.npmjs.com/settings/tokens)
-2. Create a new "Automation" token
-3. Go to your GitHub repository → Settings → Secrets and variables → Actions
-4. Add a new secret named `NPM_TOKEN` with your token value
 
 ## Release Commands
 

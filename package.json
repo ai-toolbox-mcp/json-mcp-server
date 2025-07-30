@@ -16,10 +16,9 @@
     "clean": "npm run clean-win || npm run clean-unix",
     "inspect:local": "npx @modelcontextprotocol/inspector --config claude_desktop_config.json --server json-mcp-server-local",
     "inspect:published": "npx @modelcontextprotocol/inspector --config claude_desktop_config.json --server json-mcp-server",
-    "release:patch": "node scripts/release.js patch",
-    "release:minor": "node scripts/release.js minor",
-    "release:major": "node scripts/release.js major",
-    "release": "node scripts/release.js"
+    "release:patch": "npm version patch",
+    "release:minor": "npm version minor",
+    "release:major": "npm version major"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
