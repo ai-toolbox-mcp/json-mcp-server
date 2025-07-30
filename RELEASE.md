@@ -12,48 +12,38 @@ npm login --registry=https://registry.npmjs.org/
 
 ## Release Commands
 
-### Patch Release (1.0.3 → 1.0.4)
+### Version Bump Commands
 ```bash
+# Patch Release (1.0.3 → 1.0.4)
 npm run release:patch
-```
 
-### Minor Release (1.0.3 → 1.1.0)
-```bash
+# Minor Release (1.0.3 → 1.1.0)
 npm run release:minor
-```
 
-### Major Release (1.0.3 → 2.0.0)
-```bash
+# Major Release (1.0.3 → 2.0.0)
 npm run release:major
 ```
 
-### Default Release (patch)
+### Publishing Commands
 ```bash
-npm run release
+# Dry run to test publishing (recommended first)
+npm publish --dry-run --access public --registry https://registry.npmjs.org/
+
+# Actual publish
+npm publish --access public --registry https://registry.npmjs.org/
 ```
 
 ## What Happens During Release
 
-1. **Pre-flight checks:**
-   - Verifies git working directory is clean
-   - Confirms you're on the main branch
-   - Validates npm authentication
-   - Runs tests
-
-2. **Version bump:**
-   - Updates package.json version
+1. **Version bump:**
+   - Updates package.json version using `npm version`
    - Creates a commit with the version change
    - Creates a git tag (e.g., `v1.0.4`)
 
-3. **GitHub push:**
-   - Pushes the commit to main branch
-   - Pushes the tag to trigger GitHub Actions
-
-4. **GitHub Actions:**
-   - Runs tests again
-   - Creates a GitHub release
-   - Publishes to npm registry
-   - Creates/updates a `latest` tag
+2. **Manual publishing:**
+   - Run the dry-run command to verify everything looks correct
+   - Run the publish command to publish to npm
+   - Package is published with public access to npm registry
 
 ## Troubleshooting
 
